@@ -362,7 +362,11 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         }
 
         // Lock in the changes
-        mCamera.setParameters(parameters);
+        try {
+            mCamera.setParameters(parameters);
+        }catch(Throwable t){
+            onError(t);
+        }
     }
 
     private Size determineBestPreviewSize(Camera.Parameters parameters) {
