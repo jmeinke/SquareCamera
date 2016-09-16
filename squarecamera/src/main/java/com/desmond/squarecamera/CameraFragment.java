@@ -26,6 +26,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.desmond.squarecamera.exception.CameraNotAvailableException;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -148,7 +150,11 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                 }
 
                 setupFlashMode();
-                setupCamera();
+                try {
+                    setupCamera();
+                } catch (NullPointerException e) {
+                    onError(new CameraNotAvailableException());
+                }
             }
         });
         setupFlashMode();
@@ -223,8 +229,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
             mCamera = Camera.open(cameraID);
             mPreviewView.setCamera(mCamera);
         } catch (Exception e) {
-            Log.d(TAG, "Can't open camera with id " + cameraID);
-            e.printStackTrace();
+            onError(new CameraNotAvailableException());
         }
     }
 
@@ -255,9 +260,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
 
             setSafeToTakePhoto(true);
             setCameraFocusReady(true);
-        } catch (IOException e) {
-            Log.d(TAG, "Can't start camera preview due to IOException " + e);
-            e.printStackTrace();
+        } catch (IOException e){
+            onError(new CameraNotAvailableException());
         }
     }
 
@@ -364,7 +368,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         // Lock in the changes
         try {
             mCamera.setParameters(parameters);
-        }catch(Throwable t){
+        } catch(Throwable t){
             onError(t);
         }
     }
@@ -585,6 +589,10 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         }
     }
 
+    public void onError(Throwable t) {
+        ((CameraActivity) getActivity()).returnError(t);
+        onStop();
+    }
 
     /**
      * @return true : Front facing camera is available. false : Front facing
