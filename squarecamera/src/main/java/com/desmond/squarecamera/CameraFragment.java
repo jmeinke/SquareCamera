@@ -133,18 +133,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
             }
         }
 
-        final ImageView swapCameraBtn = (ImageView) view.findViewById(R.id.change_camera);
-        swapCameraBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCameraID == CameraInfo.CAMERA_FACING_FRONT) {
-                    mCameraID = getBackCameraID();
-                } else {
-                    mCameraID = getFrontCameraID();
-                }
-                restartPreview();
-            }
-        });
+        setupSwapCameraButton((ImageView) view.findViewById(R.id.change_camera));
 
         final View changeCameraFlashModeBtn = view.findViewById(R.id.flash);
         changeCameraFlashModeBtn.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +160,25 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                 takePicture();
             }
         });
+    }
+
+    private void setupSwapCameraButton(ImageView swapCameraBtn) {
+        swapCameraBtn.setVisibility(View.INVISIBLE);
+        if(isFrontCameraAvailable()) {
+            swapCameraBtn.setVisibility(View.VISIBLE);
+            swapCameraBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mCameraID == CameraInfo.CAMERA_FACING_FRONT) {
+                        mCameraID = getBackCameraID();
+                    } else {
+                        mCameraID = getFrontCameraID();
+                    }
+                    restartPreview();
+                }
+            });
+        }
+
     }
 
     private void setupFlashMode() {
@@ -571,5 +579,36 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
             rememberOrientation();
             return mRememberedNormalOrientation;
         }
+    }
+
+
+    /**
+     * @return true : Front facing camera is available. false : Front facing
+     *         camera is not available.
+     *         based on http://stackoverflow.com/a/20560883
+     */
+    private boolean isFrontCameraAvailable() {
+
+        int cameraCount = 0;
+        boolean isFrontCameraAvailable = false;
+        try {
+            cameraCount = Camera.getNumberOfCameras();
+
+            while (cameraCount > 0) {
+                CameraInfo cameraInfo = new CameraInfo();
+                cameraCount--;
+                Camera.getCameraInfo(cameraCount, cameraInfo);
+
+
+                if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT) {
+                    isFrontCameraAvailable = true;
+                    break;
+                }
+
+            }
+        }catch(Throwable ignored){
+        }
+
+        return isFrontCameraAvailable;
     }
 }
