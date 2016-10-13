@@ -1,7 +1,6 @@
 package com.desmond.squarecamera;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -9,7 +8,6 @@ import android.graphics.Point;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.util.Base64;
 import android.view.Display;
 import android.view.WindowManager;
@@ -61,10 +59,11 @@ public class ImageUtility {
 
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, cropHeight, cropHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 
-        File mediaStorageDir = new File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                context.getString(R.string.squarecamera__app_name)
-        );
+        File mediaStorageDir = context.getFilesDir();
+//        File mediaStorageDir = new File(
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+//                context.getString(R.string.squarecamera__app_name)
+//        );
 
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
@@ -91,10 +90,10 @@ public class ImageUtility {
         }
 
         // Mediascanner need to scan for the image saved
-        Intent mediaScannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        Intent mediaScannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri fileContentUri = Uri.fromFile(mediaFile);
-        mediaScannerIntent.setData(fileContentUri);
-        context.sendBroadcast(mediaScannerIntent);
+//        mediaScannerIntent.setData(fileContentUri);
+//        context.sendBroadcast(mediaScannerIntent);
 
         return fileContentUri;
     }
