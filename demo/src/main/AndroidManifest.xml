@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.desmond.demo">
 
-    <uses-feature android:name="android.hardware.camera2" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <!-- Request permission to use a device camera -->
     <uses-permission android:name="android.permission.CAMERA" />
