@@ -8,8 +8,9 @@ import android.view.View;
 
 
 public class CameraActivity extends AppCompatActivity {
-
     public static final String TAG = CameraActivity.class.getSimpleName();
+    public static final String CAMERA_ERROR = "camera_error";
+    public static final int RESULT_ERROR = -2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +33,27 @@ public class CameraActivity extends AppCompatActivity {
     public void returnPhotoUri(Uri uri) {
         Intent data = new Intent();
         data.setData(uri);
+        setResultAndFinish(RESULT_OK, data);
+    }
 
+    public void returnError(Throwable t) {
+        Intent data = new Intent();
+        data.putExtra(CAMERA_ERROR, t);
+        setResultAndFinish(RESULT_ERROR, data);
+    }
+
+
+    private void setResultAndFinish(int resultCode, Intent intent){
         if (getParent() == null) {
-            setResult(RESULT_OK, data);
+            setResult(resultCode, intent);
         } else {
-            getParent().setResult(RESULT_OK, data);
+            getParent().setResult(resultCode, intent);
         }
 
         finish();
     }
+
+
 
     public void onCancel(View view) {
         getSupportFragmentManager().popBackStack();
