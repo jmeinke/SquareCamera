@@ -1,7 +1,10 @@
 # SquareCamera
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SquareCamera-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1745)
+
+[![Release](https://jitpack.io/v/jmeinke/SquareCamera.svg)]
+(https://jitpack.io/#jmeinke/SquareCamera)
+
 ## Description
-Android module that takes a square photo using the native Android Camera APIs. The new Camera2 APIs from the L release is not used because support has to go back to SDK version 14 for my own requirement. 
+Android module that takes a square photo using the native Android Camera API. 
 
 ## Features
 - Tap to focus
@@ -15,52 +18,50 @@ Android module that takes a square photo using the native Android Camera APIs. T
 Support from SDK version 14 onwards
 
 ## Download
-jCenter:
+In your project gradle file:
 ```groovy
-repositories {
-    jcenter()
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
 }
+```
 
+In your module gradle file:
+```groovy
 dependencies {
-    compile 'com.github.boxme:squarecamera:1.1.0'
+    compile 'com.github.jmeinke:squarecamera:1.1.2'
 }
 ```
 
 ## Example
-```java
-private static final int REQUEST_CAMERA = 0;
-
-// Check for camera permission in MashMallow
-public void requestForCameraPermission(View view) {
-    final String permission = Manifest.permission.CAMERA;
-    if (ContextCompat.checkSelfPermission(MainActivity.this, permission)
-            != PackageManager.PERMISSION_GRANTED) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
-            // Show permission rationale
-        } else {
-            // Handle the result in Activity#onRequestPermissionResult(int, String[], int[])
-            ActivityCompat.requestPermissions(YourActivity.this, new String[]{permission}, REQUEST_CAMERA_PERMISSION);
-        }
-    } else {
-        // Start CameraActivity
-    }
-}
-
-// Start CameraActivity
-Intent startCustomCameraIntent = new Intent(this, CameraActivity.class);
-startActivityForResult(startCustomCameraIntent, REQUEST_CAMERA);
-
-// Receive Uri of saved square photo
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (resultCode != RESULT_OK) return;
-
-    if (requestCode == REQUEST_CAMERA) {
-        Uri photoUri = data.getData();
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-}
-```
+See [MainActivity.java](master/demo/src/main/java/com/desmond/demo/MainActivity.java).
 
 ## Video Demo
 Link: https://youtu.be/cSGFiP-gZYU
+
+## License
+```
+The MIT License (MIT)
+
+Copyright (c) 2015 Ng Yang Yi, Desmond, and many more
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
