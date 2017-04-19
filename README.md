@@ -60,6 +60,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
     super.onActivityResult(requestCode, resultCode, data);
 }
+
+#ANDROID MANIFEST
+ <activity android:name="com.desmond.squarecamera.CameraActivity"/>
 ```
 
 ## Video Demo
