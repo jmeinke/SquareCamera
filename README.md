@@ -1,7 +1,6 @@
 # SquareCamera
 
-[![Release](https://jitpack.io/v/jmeinke/SquareCamera.svg)]
-(https://jitpack.io/#jmeinke/SquareCamera)
+[![Release](https://jitpack.io/v/jmeinke/SquareCamera.svg)](https://jitpack.io/#jmeinke/SquareCamera)
 
 ## Description
 Android module that takes a square photo using the native Android Camera API. 
@@ -18,7 +17,7 @@ Android module that takes a square photo using the native Android Camera API.
 Support from SDK version 14 onwards
 
 ## Download
-In your project gradle file:
+Add JitPack in your root build.gradle at the end of repositories:
 ```groovy
 allprojects {
     repositories {
@@ -28,10 +27,10 @@ allprojects {
 }
 ```
 
-In your module gradle file:
+Add the dependency in your module build.gradle file:
 ```groovy
 dependencies {
-    compile 'com.github.jmeinke:squarecamera:1.1.2'
+    compile 'com.github.jmeinke:SquareCamera:1.1.2'
 }
 ```
 
