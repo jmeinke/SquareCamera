@@ -26,9 +26,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.desmond.squarecamera.exception.CameraNotAvailableException;
-
-import java.io.IOException;
 import java.util.List;
 
 
@@ -150,11 +147,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                 }
 
                 setupFlashMode();
-                try {
-                    setupCamera();
-                } catch (NullPointerException e) {
-                    onError(new CameraNotAvailableException());
-                }
+                setupCamera();
             }
         });
         setupFlashMode();
@@ -228,8 +221,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         try {
             mCamera = Camera.open(cameraID);
             mPreviewView.setCamera(mCamera);
-        } catch (Exception e) {
-            onError(new CameraNotAvailableException());
+        } catch(Throwable t){
+            onError(t);
         }
     }
 
@@ -251,6 +244,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
      * Start the camera preview
      */
     private void startCameraPreview() {
+        if (mCamera == null) return;
+
         determineDisplayOrientation();
         setupCamera();
 
@@ -260,8 +255,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
 
             setSafeToTakePhoto(true);
             setCameraFocusReady(true);
-        } catch (IOException e){
-            onError(new CameraNotAvailableException());
+        } catch(Throwable t){
+            onError(t);
         }
     }
 
@@ -292,6 +287,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
      * accordingly
      */
     private void determineDisplayOrientation() {
+        if (mCamera == null) return;
+
         CameraInfo cameraInfo = new CameraInfo();
         Camera.getCameraInfo(mCameraID, cameraInfo);
 
@@ -341,6 +338,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
      * Setup the camera parameters
      */
     private void setupCamera() {
+        if (mCamera == null) return;
+
         // Never keep a global parameters
         Camera.Parameters parameters = mCamera.getParameters();
 

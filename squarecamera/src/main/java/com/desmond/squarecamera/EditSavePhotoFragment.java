@@ -22,8 +22,6 @@ public class EditSavePhotoFragment extends Fragment {
     public static final String ROTATION_KEY = "rotation";
     public static final String IMAGE_INFO = "image_info";
 
-    private static final int REQUEST_STORAGE = 1;
-
     public static Fragment newInstance(byte[] bitmapByteArray, int rotation,
                                        @NonNull ImageParameters parameters) {
         Fragment fragment = new EditSavePhotoFragment();
