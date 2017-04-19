@@ -21,9 +21,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by desmond on 24/10/14.
- */
+
 public class ImageUtility {
 
     public static String convertBitmapToString(Bitmap bitmap) {

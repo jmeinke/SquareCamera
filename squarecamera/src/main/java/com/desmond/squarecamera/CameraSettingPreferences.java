@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.support.annotation.NonNull;
 
-/**
- * Created by desmond on 4/10/15.
- */
 public class CameraSettingPreferences {
 
     private static final String FLASH_MODE = "squarecamera__flash_mode";

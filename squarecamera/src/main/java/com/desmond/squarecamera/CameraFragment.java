@@ -1,6 +1,5 @@
 package com.desmond.squarecamera;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +28,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
+
 
 public class CameraFragment extends Fragment implements SurfaceHolder.Callback, Camera.PictureCallback {
 

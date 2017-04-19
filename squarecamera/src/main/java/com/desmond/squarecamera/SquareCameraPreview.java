@@ -13,9 +13,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
+
 public class SquareCameraPreview extends SurfaceView {
 
     public static final String TAG = SquareCameraPreview.class.getSimpleName();

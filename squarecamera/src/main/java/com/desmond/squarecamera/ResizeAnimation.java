@@ -5,11 +5,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-/**
- * Created by desmond on 4/8/15.
- */
+
 public class ResizeAnimation extends Animation {
-//    public static final String TAG = ResizeAnimation.class.getSimpleName();
+    // public static final String TAG = ResizeAnimation.class.getSimpleName();
 
     final int mStartLength;
     final int mFinalLength;
@@ -21,7 +19,7 @@ public class ResizeAnimation extends Animation {
         mView = view;
         mStartLength = mIsPortrait ? mView.getHeight() : mView.getWidth();
         mFinalLength = imageParameters.getAnimationParameter();
-//        Log.d(TAG, "Start: " + mStartLength + " final: " + mFinalLength);
+        // Log.d(TAG, "Start: " + mStartLength + " final: " + mFinalLength);
     }
 
     @Override

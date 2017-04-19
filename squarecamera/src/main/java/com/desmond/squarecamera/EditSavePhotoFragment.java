@@ -1,6 +1,5 @@
 package com.desmond.squarecamera;
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,9 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-/**
- *
- */
 public class EditSavePhotoFragment extends Fragment {
 
     public static final String TAG = EditSavePhotoFragment.class.getSimpleName();
