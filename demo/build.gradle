@@ -1,16 +1,22 @@
+plugins {
+    id 'com.gladed.androidgitversion' version '0.3.4'
+}
+
 apply plugin: "com.android.application"
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
 
     defaultConfig {
         applicationId "com.desmond.demo"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.2"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,6 +27,6 @@ android {
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile project(":squarecamera")
 }

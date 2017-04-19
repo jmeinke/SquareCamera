@@ -1,23 +1,23 @@
+plugins {
+    id 'com.gladed.androidgitversion' version '0.3.4'
+}
+
 apply plugin: "com.android.library"
-apply plugin: "com.github.dcendents.android-maven"
-apply plugin: "com.jfrog.bintray"
 
 version = "1.1.0"
 group = "com.github.boxme"
 
-def siteUrl = "https://github.com/boxme/SquareCamera"
-def gitUrl = "https://github.com/boxme/SquareCamera.git"
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
     resourcePrefix "squarecamera__"
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
-        versionName "1.1.1"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
     }
     buildTypes {
         release {
@@ -32,68 +32,11 @@ android {
     }
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ["archives"]
-    pkg {
-        repo = "maven"
-        name = "SquareCamera"
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["MIT"]
-        publish = true
-    }
-}
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging "aar"
-                name "A camera that takes square photos"
-                url siteUrl
-                licenses {
-                    license {
-                        name "The MIT License"
-                        url "https://github.com/boxme/SquareCamera/blob/master/LICENSE"
-                    }
-                }
-                developers {
-                    developer {
-                        id "boxme"
-                        name "Desmond Ng"
-                        email "desmond.ng.yang.yi@gmail.com"
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-
-                }
-            }
-        }
-    }
-}
-
-repositories {
-    maven {
-        url "http://dl.bintray.com/populov/maven"
-    }
-    mavenCentral()
-    mavenLocal()
-}
-
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:support-v4:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
 }
 
 task sourcesJar(type: Jar) {

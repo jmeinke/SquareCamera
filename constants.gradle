@@ -1,0 +1,9 @@
+project.ext {
+    compileSdk = 25
+    targetSdk = 25
+    minSdk = 14
+
+    buildTools = '25.0.2'
+
+    supportLibraryVersion = '25.3.1'
+}
