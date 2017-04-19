@@ -35,7 +35,7 @@ dependencies {
 ```
 
 ## Example
-See [MainActivity.java](master/demo/src/main/java/com/desmond/demo/MainActivity.java).
+See [MainActivity.java](demo/src/main/java/com/desmond/demo/MainActivity.java).
 
 ## Video Demo
 Link: https://youtu.be/cSGFiP-gZYU
